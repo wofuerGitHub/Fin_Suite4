@@ -1,0 +1,46 @@
+version: '3'
+services:
+  update_company_key_stats:
+    image: update_company_key_stats
+    container_name: update_company_key_stats
+    restart: always
+    tty: true
+    environment:
+      - TZ=Europe/Berlin
+    network_mode: host
+  update_symbols_list:
+    image: update_symbols_list
+    container_name: update_symbols_list
+    restart: always
+    tty: true
+    environment:
+      - TZ=Europe/Berlin
+    network_mode: host
+  update_balance_sheet_statement:
+    image: update_balance_sheet_statement
+    container_name: update_balance_sheet_statement
+    restart: always
+    tty: true
+    environment:
+      - TZ=Europe/Berlin
+    network_mode: host
+  update_cash_flow_statement:
+    image: update_cash_flow_statement
+    container_name: update_cash_flow_statement
+    restart: always
+    tty: true
+    environment:
+      - TZ=Europe/Berlin
+    network_mode: host
+  update_income_statement:
+    image: update_income_statement
+    container_name: update_income_statement
+    restart: always
+    tty: true
+    environment:
+      - TZ=Europe/Berlin
+    network_mode: host
+networks:
+  default:
+    external:
+      name: default_network
