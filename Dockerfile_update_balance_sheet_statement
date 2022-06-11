@@ -15,7 +15,9 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 # copy the content of the local src directory to the working directory
+RUN touch fin_suite4.log
 COPY update_balance_sheet_statement.py ./
+
 
 # command to run on container start
 CMD [ "python", "./update_balance_sheet_statement.py" ] 

@@ -8,7 +8,7 @@ from mylib.investment_db import put_symbol_checked
 from mylib.investment_db import put_symbol_updated
 from mylib.financial_modeling_prep import get_balance_sheet_statement
 
-LOG_FILE = 'fin_suite4.log'
+LOG_FILE = './fin_suite4.log'
 
 writeLog(LOG_FILE, 'Start Update Balance Sheet Statement')
 

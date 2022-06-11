@@ -8,7 +8,7 @@ from mylib.investment_db import put_company_key_stats
 from mylib.investment_db import put_company_key_stats_checked
 from mylib.investment_db import put_company_key_stats_updated
 
-LOG_FILE = 'fin_suite4.log'
+LOG_FILE = './fin_suite4.log'
 
 writeLog(LOG_FILE, 'Start Update Company Key Stats')
 

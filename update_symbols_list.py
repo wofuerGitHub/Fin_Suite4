@@ -7,7 +7,7 @@ from mylib.investment_db import put_symbols_list
 from mylib.investment_db import put_symbols_list_checked
 from mylib.investment_db import put_symbols_list_updated
 
-LOG_FILE = 'fin_suite4.log'
+LOG_FILE = './fin_suite4.log'
 
 writeLog(LOG_FILE, 'Start Update Symbols List')
 

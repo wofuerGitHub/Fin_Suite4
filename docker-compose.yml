@@ -5,6 +5,8 @@ services:
     container_name: update_company_key_stats
     restart: always
     tty: true
+    volumes:
+      - '/home/docker/finsuite/fin_suite4.log:/code/fin_suite4.log'
     environment:
       - TZ=Europe/Berlin
     network_mode: host
@@ -13,6 +15,8 @@ services:
     container_name: update_symbols_list
     restart: always
     tty: true
+    volumes:
+      - '/home/docker/finsuite/fin_suite4.log:/code/fin_suite4.log'
     environment:
       - TZ=Europe/Berlin
     network_mode: host
@@ -21,6 +25,8 @@ services:
     container_name: update_balance_sheet_statement
     restart: always
     tty: true
+    volumes:
+      - '/home/docker/finsuite/fin_suite4.log:/code/fin_suite4.log'
     environment:
       - TZ=Europe/Berlin
     network_mode: host
@@ -29,6 +35,8 @@ services:
     container_name: update_cash_flow_statement
     restart: always
     tty: true
+    volumes:
+      - '/home/docker/finsuite/fin_suite4.log:/code/fin_suite4.log'
     environment:
       - TZ=Europe/Berlin
     network_mode: host
@@ -37,6 +45,8 @@ services:
     container_name: update_income_statement
     restart: always
     tty: true
+    volumes:
+      - '/home/docker/finsuite/fin_suite4.log:/code/fin_suite4.log'
     environment:
       - TZ=Europe/Berlin
     network_mode: host
