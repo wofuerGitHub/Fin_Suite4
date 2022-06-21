@@ -10,7 +10,7 @@ from mylib.investment_db import put_company_key_stats_updated
 
 LOG_FILE = './fin_suite4.log'
 
-writeLog(LOG_FILE, 'Start Update Company Key Stats')
+writeLog(LOG_FILE, 'Start Update Company Key Stats', id = 'UCK')
 
 df = get_company_key_stats_overview()
 for index, row in df.iterrows():
@@ -22,7 +22,7 @@ for index, row in df.iterrows():
         for item in data:
             put_company_key_stats(item)
         put_company_key_stats_updated(symbol)
-    except:
-        pass
+    except: # pylint: disable=bare-except
+        writeLog(LOG_FILE, ''+symbol+' not stored', id = 'UCK')
     
-writeLog(LOG_FILE, 'End Update Company Key Stats')
+writeLog(LOG_FILE, 'End Update Company Key Stats', id = 'UCK')

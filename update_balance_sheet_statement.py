@@ -1,3 +1,5 @@
+""" update balancesheetstatement based on companykeystats from fmg """
+
 #!/usr/bin/python3
 
 from mylib.getApiKey import getApiKey
@@ -10,7 +12,7 @@ from mylib.financial_modeling_prep import get_balance_sheet_statement
 
 LOG_FILE = './fin_suite4.log'
 
-writeLog(LOG_FILE, 'Start Update Balance Sheet Statement')
+writeLog(LOG_FILE, 'Start Update Balance Sheet Statement', id = 'BSS')
 
 df = get_company_key_stats_overview()
 for index, row in df.iterrows():
@@ -22,7 +24,7 @@ for index, row in df.iterrows():
         for item in data:
             put_dict_list_to_table(item, 'balancesheetstatement')
         put_symbol_updated(symbol, 'balancesheetstatement')
-    except:
-        pass
+    except: # pylint: disable=bare-except
+        writeLog(LOG_FILE, ''+symbol+' not stored', id = 'BSS')
 
-writeLog(LOG_FILE, 'End Update Balance Sheet Statement')
+writeLog(LOG_FILE, 'End Update Balance Sheet Statement', id = 'BSS')
