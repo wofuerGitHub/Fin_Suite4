@@ -55,7 +55,7 @@ def get_financial_statement_list(api:str):
     url = "https://financialmodelingprep.com/api/v3/financial-statement-symbol-lists?apikey="+api
     return get_jsonparsed_data(url)
 
-def get_symbols_list(api:str):
+def get_symbols_list(api:str, **kwargs):
     """
     Receive the financial statement list.
     https://site.financialmodelingprep.com/developer/docs#Financial-Statements-List
@@ -63,12 +63,17 @@ def get_symbols_list(api:str):
     Parameters
     ----------
     api : str
+    type : str
 
     Returns
     -------
     list
     """
-    url = "https://financialmodelingprep.com/api/v3/stock/list?apikey="+api
+    type = kwargs.get('type', 'stock')
+    if type == 'etf':
+        url = "https://financialmodelingprep.com/api/v3/etf/list?apikey="+api
+    else:
+        url = "https://financialmodelingprep.com/api/v3/stock/list?apikey="+api
     return get_jsonparsed_data(url)
 
 def get_company_key_stats(company:str, api:str):
