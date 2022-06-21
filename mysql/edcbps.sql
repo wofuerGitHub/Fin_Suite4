@@ -1,3 +1,5 @@
+/* Calculation of EPS, DPS, CPS and BPS. */
+
 SELECT ins.date, ins.symbol, ins.reportedCurrency, ins.calendarYear, ins.period,
 	ins.netIncome/ins.weightedAverageShsOut as 'eps', 
 	-cfs.dividendsPaid/ins.weightedAverageShsOut as 'dps', # https://corporatefinanceinstitute.com/resources/knowledge/finance/dividend-per-share/
