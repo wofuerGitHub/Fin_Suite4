@@ -47,20 +47,9 @@ End with an example of getting some data out of the system or using it for a lit
 
 ## Usage <a name = "usage"></a>
 
-<<<<<<< HEAD
 - "update_symbol_list" gets & updates all available symbols
 
 - "update_company_key_stats" updates company key information & provides the symbols for
   - "update_balance_sheet_statement"
   - "update_cash_flow_statement"
   - "update_income_statement"
-=======
-### "update_symbol_list" gets & updates all available symbols
-
-### "update_company_key_stats" updates company key information & provides the symbols for
-#### --> update_balance_sheet_statement
-#### --> update_cash_flow_statement
-#### --> update_income_statement
->>>>>>> 061614df670a0533cf9112a0fa629936709c162b
-
-
