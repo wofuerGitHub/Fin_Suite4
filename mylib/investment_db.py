@@ -45,7 +45,7 @@ def put_dict_to_mysql(table:str, data:dict):
     placeholders = ', '.join(['%s'] * len(data))  # string build %s based on number of colums
     on_duplicate = "`%s`" % '` = %s, `'.join(data.keys())    # string build on column names
     on_duplicate = on_duplicate + ' = %s'
-    sql = "INSERT INTO %s ( %s ) VALUES ( %s ) ON DUPLICATE KEY UPDATE %s" % (table, columns, placeholders, on_duplicate)
+    sql = "INSERT INTO %s ( %s ) VALUES ( %s ) ON DUPLICATE KEY UPDATE %s;" % (table, columns, placeholders, on_duplicate)
     sql_engine.execute(sql, list(data.values()) + list(data.values()))
 
 def get_financial_statement():
