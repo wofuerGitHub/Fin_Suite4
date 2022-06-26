@@ -1,0 +1,16 @@
+version: '3'
+services:
+  update_fx_eur:
+    image: update_fx_eur
+    container_name: update_fx_eur
+    restart: always
+    tty: true
+    volumes:
+      - '/home/docker/finsuite/fin_suite4.log:/code/fin_suite4.log'
+    environment:
+      - TZ=Europe/Berlin
+    network_mode: host
+networks:
+  default:
+    external:
+      name: default_network

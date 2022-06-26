@@ -32,12 +32,41 @@ def get_jsonparsed_data(url:str):
         print(err.code)
         return {}
 
-"""
-tests:
-- KSU^
-"""
-    
+def get_fx_eur(api:str, currency:str, **kwargs):
+    """
+    Receive the exchange rate to EUR.
+    https://site.financialmodelingprep.com/developer/docs/historical-stock-data-free-api/#Historical-Daily-Prices-with-change-and-volume-interval
+    https://financialmodelingprep.com/api/v3/historical-price-full/EURUSD?from=2018-03-12&to=2022-06-31&apikey=YOUR_API_KEY
 
+    Parameters
+    ----------
+    api : str
+    currency : str
+    startDate : str
+    endDate : str
+
+    Returns
+    -------
+    list
+    """
+    startDate = kwargs.get('startDate', None)
+    endDate = kwargs.get('endDate', None)
+    timeseries = str(kwargs.get('timeseries', None))
+
+
+    url = "https://financialmodelingprep.com/api/v3/historical-price-full/EUR"+currency+"?"
+    if startDate:
+        url = url+"from="+startDate+"&"
+    if endDate:
+        url = url+"to="+endDate+"&"
+    if timeseries:
+        url = url+"timeseries="+timeseries+"&"        
+    url = url+"apikey="+api
+    data =  get_jsonparsed_data(url)
+    try:
+        return data['historical']
+    except: # pylint: disable=bare-except
+        return {}
 
 def get_financial_statement_list(api:str):
     """
@@ -143,5 +172,8 @@ def get_cash_flow_statement(company:str, api:str):
     """
     url = "https://financialmodelingprep.com/api/v3/cash-flow-statement/"+company+"?limit=10&apikey="+api
     return get_jsonparsed_data(url)
-# print(get_company_key_stats('aapl', 'ab6801b4bddcf7ef835ca3850fd7333d'))
+
+# print(get_company_key_stats('aapl', 'API_KEY'))
+
+# print(get_fx_eur('ab6801b4bddcf7ef835ca3850fd7333d', 'USD', startDate = '2022-06-20'))
     

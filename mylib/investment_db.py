@@ -101,6 +101,11 @@ def get_company_key_stats_overview():
     query = "SELECT symbol FROM companykeystats ORDER BY `checked` ASC"
     return pd.read_sql_query(query, sql_engine)
 
+def get_company_key_stats_currencies():
+    query = "SELECT `currency`, count(*) as `count` FROM fmg.companykeystats WHERE length(`currency`) = 3 GROUP BY `currency` ORDER BY `count` DESC;"
+    return pd.read_sql_query(query, sql_engine)
+
+
 def put_company_key_stats(data:dict):
     put_dict_to_mysql('companykeystats', data)
 
@@ -117,10 +122,18 @@ def put_company_key_stats_updated(symbol:str):
 def put_dict_list_to_table(data:dict, table:str):
     put_dict_to_mysql(table, data)
 
-def put_symbol_checked(symbol:str, table:str):
-    query = "UPDATE "+table+" SET `checked` = NOW() WHERE `symbol` = '"+symbol+"';"
+def put_symbol_checked(symbol:str, table:str, **kwargs):
+    date = kwargs.get('date', None)
+    if date:
+        query = "UPDATE "+table+" SET `checked` = NOW() WHERE `symbol` = '"+symbol+"' AND `date` = '"+date+"';"
+    else:
+        query = "UPDATE "+table+" SET `checked` = NOW() WHERE `symbol` = '"+symbol+"';"
     sql_engine.execute(query)
 
-def put_symbol_updated(symbol:str, table:str):
-    query = "UPDATE "+table+" SET `updated` = NOW() WHERE `symbol` = '"+symbol+"';"
+def put_symbol_updated(symbol:str, table:str, **kwargs):
+    date = kwargs.get('date', None)
+    if date:
+        query = "UPDATE "+table+" SET `updated` = NOW() WHERE `symbol` = '"+symbol+"' AND `date` = '"+date+"';"
+    else:
+        query = "UPDATE "+table+" SET `updated` = NOW() WHERE `symbol` = '"+symbol+"';"
     sql_engine.execute(query)
