@@ -9,3 +9,5 @@ docker build --pull --rm -f "Dockerfile_update_symbols_list" -t update_symbols_l
 docker build --pull --rm -f "Dockerfile_update_fx_eur" -t update_fx_eur:latest "."
 
 docker-compose -f "docker-compose.yml" up -d --build --remove-orphans
+
+docker-compose -f "docker-compose_update_fx_eur.yml" up -d --build
