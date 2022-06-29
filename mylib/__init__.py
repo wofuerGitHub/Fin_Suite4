@@ -13,3 +13,4 @@ from .investment_db import put_company_key_stats
 from .investment_db import put_dict_list_to_table
 from .investment_db import put_symbol_checked
 from .investment_db import put_symbol_updated
+from .investment_db import get_fx_list

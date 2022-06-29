@@ -161,3 +161,24 @@ def put_quote(quote:dict, currency:str):
             'updated':datetime.fromtimestamp(quote['timestamp']).strftime("%Y-%m-%d %H:%M:%S")}
     put_dict_to_mysql('quote', quoteToInsert)
 
+# --- Streaming FX
+
+def get_fx_list():
+    query = "SELECT symbol FROM fx_eur group by symbol"
+    return pd.read_sql_query(query, sql_engine)    
+
+def get_last_fx(symbol:str):
+    query = "SELECT symbol, close, currency FROM fx_eur WHERE symbol = '"+symbol+"' order by date desc limit 0,1"
+    return pd.read_sql_query(query, sql_engine)
+
+def put_fx(quote:dict, currency:str):
+    quoteToInsert = {'date':datetime.fromtimestamp(quote['timestamp']).strftime("%Y-%m-%d"), \
+            'symbol':quote['symbol'][3:],
+            'open':quote['open'],
+            'high':quote['dayHigh'],
+            'low':quote['dayLow'],
+            'close':quote['price'],
+            'currency':currency,
+            'checked':datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            'updated':datetime.fromtimestamp(quote['timestamp']).strftime("%Y-%m-%d %H:%M:%S")}
+    put_dict_to_mysql('fx_eur', quoteToInsert)
