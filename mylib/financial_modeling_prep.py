@@ -173,6 +173,21 @@ def get_cash_flow_statement(company:str, api:str):
     url = "https://financialmodelingprep.com/api/v3/cash-flow-statement/"+company+"?limit=10&apikey="+api
     return get_jsonparsed_data(url)
 
+def get_quote(api:str, symbol:str):
+    """
+    Receive the financial statement list.
+    https://site.financialmodelingprep.com/developer/docs#Financial-Statements-List
+
+    Parameters
+    ----------
+    api : str
+
+    Returns
+    -------
+    list
+    """
+    url = "https://financialmodelingprep.com/api/v3/quote/"+symbol+"?apikey="+api
+    return get_jsonparsed_data(url)[0]
 # print(get_company_key_stats('aapl', 'API_KEY'))
 
 # print(get_fx_eur('ab6801b4bddcf7ef835ca3850fd7333d', 'USD', startDate = '2022-06-20'))

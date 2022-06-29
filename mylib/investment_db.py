@@ -2,6 +2,7 @@
 
 #!/usr/bin/python3
 
+from datetime import datetime
 import pandas as pd
 import sqlalchemy as sql
 
@@ -137,3 +138,26 @@ def put_symbol_updated(symbol:str, table:str, **kwargs):
     else:
         query = "UPDATE "+table+" SET `updated` = NOW() WHERE `symbol` = '"+symbol+"';"
     sql_engine.execute(query)
+
+# --- Streaming quotes
+
+def get_quote_list():
+    query = "SELECT symbol FROM quote group by symbol"
+    return pd.read_sql_query(query, sql_engine)    
+
+def get_last_quote(symbol:str):
+    query = "SELECT symbol, close, currency FROM quote WHERE symbol = '"+symbol+"' order by date desc limit 0,1"
+    return pd.read_sql_query(query, sql_engine)
+
+def put_quote(quote:dict, currency:str):
+    quoteToInsert = {'date':datetime.fromtimestamp(quote['timestamp']).strftime("%Y-%m-%d"), \
+            'symbol':quote['symbol'],
+            'open':quote['open'],
+            'high':quote['dayHigh'],
+            'low':quote['dayLow'],
+            'close':quote['price'],
+            'currency':currency,
+            'checked':datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            'updated':datetime.fromtimestamp(quote['timestamp']).strftime("%Y-%m-%d %H:%M:%S")}
+    put_dict_to_mysql('quote', quoteToInsert)
+
