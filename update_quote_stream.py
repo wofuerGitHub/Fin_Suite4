@@ -13,15 +13,14 @@ LOG_FILE = './fin_suite4.log'
 
 writeLog(LOG_FILE, 'Start Update Quote Stream', id = 'UQS')
 
-while True:
-    symbolsToQuery = get_quote_list()
+symbolsToQuery = get_quote_list()
 
-    for index, row in symbolsToQuery.iterrows():
+for index, row in symbolsToQuery.iterrows():
 
-        symbolToQuery = get_last_quote(row['symbol'])
+    symbolToQuery = get_last_quote(row['symbol'])
 
-        print(symbolToQuery.iloc[0]['symbol'], symbolToQuery.iloc[0]['currency'])
-        quote = get_quote(getApiKey(), row['symbol'])
-        put_quote(quote, symbolToQuery.iloc[0]['currency'])
+    print(symbolToQuery.iloc[0]['symbol'], symbolToQuery.iloc[0]['currency'])
+    quote = get_quote(getApiKey(), row['symbol'])
+    put_quote(quote, symbolToQuery.iloc[0]['currency'])
 
 writeLog(LOG_FILE, 'Stop Update Quote Stream', id = 'UQS')

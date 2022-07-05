@@ -106,7 +106,17 @@ def get_company_key_stats_currencies():
     query = "SELECT `currency`, count(*) as `count` FROM fmg.companykeystats WHERE length(`currency`) = 3 GROUP BY `currency` ORDER BY `count` DESC;"
     return pd.read_sql_query(query, sql_engine)
 
+# ---quotes
 
+def get_quote_to_insert():
+    query = "SELECT symbol, currency FROM referencedata WHERE longTimeSerie = 1 ORDER BY `updated` ASC"
+    return pd.read_sql_query(query, sql_engine)
+
+def set_quote_to_stream_only(symbol:str):
+    query = "UPDATE referencedata SET `longTimeSerie` = 0,  `updated`=NOW() WHERE `symbol` = '"+symbol+"';"
+    sql_engine.execute(query)
+
+# ---
 def put_company_key_stats(data:dict):
     put_dict_to_mysql('companykeystats', data)
 
@@ -118,7 +128,7 @@ def put_company_key_stats_updated(symbol:str):
     query = "UPDATE "+'companykeystats'+" SET `updated` = NOW() WHERE `symbol` = '"+symbol+"';"
     sql_engine.execute(query)
 
-# ---
+# --- Updated checked & Updated
 
 def put_dict_list_to_table(data:dict, table:str):
     put_dict_to_mysql(table, data)

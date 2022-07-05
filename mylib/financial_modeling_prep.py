@@ -68,6 +68,44 @@ def get_fx_eur(api:str, currency:str, **kwargs):
     except: # pylint: disable=bare-except
         return {}
 
+def get_quote_serie(api:str, symbol:str, **kwargs):
+    """
+    Receive the quote.
+    https://site.financialmodelingprep.com/developer/docs/historical-stock-data-free-api/#Historical-Daily-Prices-with-change-and-volume-interval
+    https://financialmodelingprep.com/api/v3/historical-price-full/EURUSD?from=2018-03-12&to=2022-06-31&apikey=YOUR_API_KEY
+
+    Parameters
+    ----------
+    api : str
+    currency : str
+    startDate : str
+    endDate : str
+
+    Returns
+    -------
+    list
+    """
+    startDate = kwargs.get('startDate', None)
+    endDate = kwargs.get('endDate', None)
+    timeseries = kwargs.get('timeseries', None)
+
+    # url = "https://financialmodelingprep.com/api/v3/historical-price-full/AUS.DE?serietype=line&"
+
+    url = "https://financialmodelingprep.com/api/v3/historical-price-full/"+symbol+"?serietype=line&"
+    if startDate:
+        url = url+"from="+startDate+"&"
+    if endDate:
+        url = url+"to="+endDate+"&"
+    if timeseries:
+        url = url+"timeseries="+timeseries+"&"        
+    url = url+"apikey="+api
+    print(url)
+    data =  get_jsonparsed_data(url)
+    try:
+        return data['historical']
+    except: # pylint: disable=bare-except
+        return {}
+
 def get_financial_statement_list(api:str):
     """
     Receive the financial statement list.
@@ -191,4 +229,5 @@ def get_quote(api:str, symbol:str):
 # print(get_company_key_stats('aapl', 'API_KEY'))
 
 # print(get_fx_eur('ab6801b4bddcf7ef835ca3850fd7333d', 'USD', startDate = '2022-06-20'))
+# https://financialmodelingprep.com/api/v3/quote/AAPL?apikey=ab6801b4bddcf7ef835ca3850fd7333d
     
