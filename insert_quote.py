@@ -26,8 +26,8 @@ def update_quote(symbol:str, currency:str):
             writeLog(LOG_FILE, 'Symbol '+dataToInsert['symbol']+' on '+dataToInsert['date']+' not stored', id = 'UPQ')
 
 for index,row in insert_quote.iterrows():
-    symbol = row['symbol'].upper()
-    currency = row['currency'].upper()
+    symbol = row['symbol']
+    currency = row['currency']
     print(symbol, currency)
     update_quote(symbol, currency)
     set_quote_to_stream_only(symbol)
