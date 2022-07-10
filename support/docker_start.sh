@@ -1,14 +1,17 @@
 #!/bin/bash
-sudo docker ps -a
+docker ps -a
 
-sudo docker start update_symbols_list
-sudo docker start update_cash_flow_statement
+docker start fmg_basic_symbolslist
+docker start fmg_basic_companykeystats
 
-sudo docker start update_company_key_stats
-sudo docker start update_balance_sheet_statement
-sudo docker start update_income_statement
+docker start fmg_fun_income
+docker start fmg_fun_cashflow
+docker start fmg_fun_balancesheet
 
-sudo docker start update_fx_stream
-sudo docker start update_quote_stream
+docker start fmg_load_quote
+docker start fmg_load_fx
 
-sudo docker ps -a
+docker start fmg_stream_quote
+docker start fmg_stream_fx
+
+docker ps -a

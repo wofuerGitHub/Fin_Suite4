@@ -1,15 +1,17 @@
 #!/bin/bash
-sudo docker ps -a
-sudo docker stop update_fx_eur
+docker ps -a
 
-sudo docker stop update_symbols_list
-sudo docker stop update_cash_flow_statement
+docker stop fmg_basic_symbolslist
+docker stop fmg_basic_companykeystats
 
-sudo docker stop update_company_key_stats
-sudo docker stop update_balance_sheet_statement
-sudo docker stop update_income_statement
+docker stop fmg_fun_income
+docker stop fmg_fun_cashflow
+docker stop fmg_fun_balancesheet
 
-sudo docker stop update_fx_stream
-sudo docker stop update_quote_stream
+docker stop fmg_load_quote
+docker stop fmg_load_fx
 
-sudo docker ps -a
+docker stop fmg_stream_quote
+docker stop fmg_stream_fx
+
+docker ps -a
