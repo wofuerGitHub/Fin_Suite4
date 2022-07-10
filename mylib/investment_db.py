@@ -174,3 +174,7 @@ def get_quote_eur_timeserie(symbol:str):
 
 def put_dataframe_to_table(dataframe:str, table:str):
     dataframe.to_sql(name=table, con=sql_engine, if_exists = 'replace', index=False)
+
+def get_quote_eur_timeserie_all_1y():
+    query = "SELECT `symbol`, `date`, `close` FROM quote_eur WHERE `date` >= (CURDATE() - INTERVAL 1 YEAR) AND DAYOFWEEK(`date`) in (2,3,4,5,6) ORDER BY `symbol`,`date` ASC;"
+    return pd.read_sql_query(query, sql_engine)
