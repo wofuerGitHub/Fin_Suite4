@@ -17,12 +17,6 @@ def get_jsonparsed_data(url:str):
     Returns
     -------
     dict
-
-    Tests
-    -----
-    
-
-
     """
     try:
         response = urlopen(url, cafile=certifi.where())

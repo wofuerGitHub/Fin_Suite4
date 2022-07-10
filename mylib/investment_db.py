@@ -49,36 +49,6 @@ def put_dict_to_mysql(table:str, data:dict):
     sql = "INSERT INTO %s ( %s ) VALUES ( %s ) ON DUPLICATE KEY UPDATE %s;" % (table, columns, placeholders, on_duplicate)
     sql_engine.execute(sql, list(data.values()) + list(data.values()))
 
-def get_financial_statement():
-    """
-    Receive the complete financials list as dataframe.
-
-    Parameters
-    ----------
-    none
-
-    Returns
-    -------
-    panda.DataFrame
-    """
-    return get_mysql_data('financials')
-
-def put_financial_statement(symbol:str):
-    """
-    Put a 'symbol' to the database.
-
-    Parameters
-    ----------
-    symbol : str
-
-    Returns
-    -------
-    None
-    """
-    query = "INSERT INTO "+'financials'+" (`symbol`, `checked`) VALUES ('"+symbol+"', NOW()) ON DUPLICATE KEY UPDATE checked = NOW();"
-    sql_engine.execute(query)
-    return 0
-
 # ---
 
 def get_symbols_list_overview():
