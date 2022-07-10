@@ -162,3 +162,15 @@ def put_fx(quote:dict, currency:str):
             'checked':datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             'updated':datetime.fromtimestamp(quote['timestamp']).strftime("%Y-%m-%d %H:%M:%S")}
     put_dict_to_mysql('fx_eur', quoteToInsert)
+
+#---- Analytics
+def get_quote_eur_list():
+    query = "SELECT `symbol`, max(`date`) AS max_date, min(`date`) AS min_date FROM quote_eur group by `symbol`;"
+    return pd.read_sql_query(query, sql_engine)
+
+def get_quote_eur_timeserie(symbol:str):
+    query = "SELECT `date`, `close` FROM quote_eur WHERE `symbol`='"+symbol+"' ORDER BY `date` DESC;"
+    return pd.read_sql_query(query, sql_engine)
+
+def put_dataframe_to_table(dataframe:str, table:str):
+    dataframe.to_sql(name=table, con=sql_engine, if_exists = 'replace', index=False)
