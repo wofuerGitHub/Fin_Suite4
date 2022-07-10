@@ -1,0 +1,36 @@
+version: '3'
+services:
+  fmg_fun_balancesheet:
+    image: fmg_fun_balancesheet
+    container_name: fmg_fun_balancesheet
+    restart: always
+    tty: true
+    volumes:
+      - '/home/docker/finsuite/fin_suite4.log:/code/fin_suite4.log'
+    environment:
+      - TZ=Europe/Berlin
+    network_mode: host
+  fmg_fun_cashflow:
+    image: fmg_fun_cashflow
+    container_name: fmg_fun_cashflow
+    restart: always
+    tty: true
+    volumes:
+      - '/home/docker/finsuite/fin_suite4.log:/code/fin_suite4.log'
+    environment:
+      - TZ=Europe/Berlin
+    network_mode: host
+  fmg_fun_income:
+    image: fmg_fun_income
+    container_name: fmg_fun_income
+    restart: always
+    tty: true
+    volumes:
+      - '/home/docker/finsuite/fin_suite4.log:/code/fin_suite4.log'
+    environment:
+      - TZ=Europe/Berlin
+    network_mode: host
+networks:
+  default:
+    external:
+      name: default_network

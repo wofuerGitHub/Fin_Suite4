@@ -1,0 +1,26 @@
+version: '3'
+services:
+  fmg_load_fx:
+    image: fmg_load_fx
+    container_name: fmg_load_fx
+    restart: always
+    tty: true
+    volumes:
+      - '/home/docker/finsuite/fin_suite4.log:/code/fin_suite4.log'
+    environment:
+      - TZ=Europe/Berlin
+    network_mode: host
+  fmg_load_quote:
+    image: fmg_load_quote
+    container_name: fmg_load_quote
+    restart: always
+    tty: true
+    volumes:
+      - '/home/docker/finsuite/fin_suite4.log:/code/fin_suite4.log'
+    environment:
+      - TZ=Europe/Berlin
+    network_mode: host
+networks:
+  default:
+    external:
+      name: default_network

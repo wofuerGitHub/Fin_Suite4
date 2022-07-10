@@ -1,0 +1,26 @@
+version: '3'
+services:
+  fmg_basic_symbolslist:
+    image: fmg_basic_symbolslist
+    container_name: fmg_basic_symbolslist
+    restart: always
+    tty: true
+    volumes:
+      - '/home/docker/finsuite/fin_suite4.log:/code/fin_suite4.log'
+    environment:
+      - TZ=Europe/Berlin
+    network_mode: host
+  fmg_basic_companykeystats:
+    image: fmg_basic_companykeystats
+    container_name: fmg_basic_companykeystats
+    restart: always
+    tty: true
+    volumes:
+      - '/home/docker/finsuite/fin_suite4.log:/code/fin_suite4.log'
+    environment:
+      - TZ=Europe/Berlin
+    network_mode: host
+networks:
+  default:
+    external:
+      name: default_network
