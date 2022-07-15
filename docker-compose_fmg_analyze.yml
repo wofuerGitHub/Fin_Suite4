@@ -1,4 +1,4 @@
-version: '3'
+version: '2.4'
 services:
   fmg_analyze_correlation:
     image: fmg_analyze_correlation
@@ -10,6 +10,18 @@ services:
     environment:
       - TZ=Europe/Berlin
     network_mode: host
+    cpus: 0.10
+  fmg_analyze_optimization:
+    image: fmg_analyze_optimization
+    container_name: fmg_analyze_optimization
+    restart: always
+    tty: true
+    volumes:
+      - '/home/docker/finsuite/fin_suite4.log:/code/fin_suite4.log'
+    environment:
+      - TZ=Europe/Berlin
+    network_mode: host
+    cpus: 0.10
   fmg_analyze_pvs:
     image: fmg_analyze_pvs
     container_name: fmg_analyze_pvs
@@ -20,6 +32,7 @@ services:
     environment:
       - TZ=Europe/Berlin
     network_mode: host
+    cpus: 0.10
 networks:
   default:
     external:

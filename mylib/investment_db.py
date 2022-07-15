@@ -178,3 +178,7 @@ def put_dataframe_to_table(dataframe:str, table:str):
 def get_quote_eur_timeserie_all_1y():
     query = "SELECT `symbol`, `date`, `close` FROM quote_eur WHERE `date` >= (CURDATE() - INTERVAL 1 YEAR) AND DAYOFWEEK(`date`) in (2,3,4,5,6) ORDER BY `symbol`,`date` ASC;"
     return pd.read_sql_query(query, sql_engine)
+
+def get_portfolio():
+    query = "SELECT a.`symbol`, a.`isin`, a.`companyName`, IFNULL(b.`all`, 0) as `all` FROM referencedata a LEFT JOIN portfolio b ON a.`isin` = b.`isin`;"
+    return pd.read_sql_query(query, sql_engine)
