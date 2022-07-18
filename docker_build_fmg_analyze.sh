@@ -1,6 +1,7 @@
 #!/bin/bash
 
 docker build --pull --rm -f "Dockerfile_fmg_analyze_pvs" -t fmg_analyze_pvs:latest "."
+docker build --pull --rm -f "Dockerfile_fmg_analyze_board" -t fmg_analyze_board:latest "."
 docker build --pull --rm -f "Dockerfile_fmg_analyze_correlation" -t fmg_analyze_correlation:latest "."
 docker build --pull --rm -f "Dockerfile_fmg_analyze_optimization" -t fmg_analyze_optimization:latest "."
 

@@ -1,5 +1,16 @@
 version: '2.4'
 services:
+  fmg_analyze_board:
+    image: fmg_analyze_board
+    container_name: fmg_analyze_board
+    restart: always
+    tty: true
+    volumes:
+      - '/home/docker/finsuite/fin_suite4.log:/code/fin_suite4.log'
+    environment:
+      - TZ=Europe/Berlin
+    network_mode: host
+    cpus: 0.10
   fmg_analyze_correlation:
     image: fmg_analyze_correlation
     container_name: fmg_analyze_correlation

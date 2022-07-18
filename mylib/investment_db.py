@@ -182,3 +182,11 @@ def get_quote_eur_timeserie_all_1y():
 def get_portfolio():
     query = "SELECT a.`symbol`, a.`isin`, a.`companyName`, IFNULL(b.`all`, 0) as `all` FROM referencedata a LEFT JOIN portfolio b ON a.`isin` = b.`isin`;"
     return pd.read_sql_query(query, sql_engine)
+
+def get_edcbps_history():
+#    query = "SELECT `date`, `symbol`, `eps_eur` as `eps`, `dps_eur` as `dps`, `cps_eur` as `cps`, `bps_eur` as `bps` FROM fmg.edcbps_eur  WHERE `date` >= (CURDATE() - INTERVAL 7 YEAR);"
+#    query = "SELECT b.`date`, b.`symbol`, b.`eps_eur` as `eps`, b.`dps_eur` as `dps`, b.`cps_eur` as `cps`, b.`bps_eur` as `bps` from referencedata a LEFT JOIN edcbps_eur b ON a.symbol_fundamental = b.symbol WHERE b.`date` IS NOT NULL AND  b.`date` >= (CURDATE() - INTERVAL 7 YEAR);"
+    query = "call get_edcbps_history();"
+    return pd.read_sql_query(query, sql_engine)
+
+    
